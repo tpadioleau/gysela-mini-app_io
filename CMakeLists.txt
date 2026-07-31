@@ -7,8 +7,6 @@ project(gysela-mini-app_io LANGUAGES CXX)
 #                              Build libraries and executables
 ###############################################################################################
 
-set(CMAKE_FIND_PACKAGE_TARGETS_GLOBAL ON)
-
 ## Link to Gyselalibxx++ library
 find_package(gyselalibxx REQUIRED)
 
