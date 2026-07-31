@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <spline_interpolation.hpp>
 #include <geometry_xyvxvy.hpp>
+#include <spline_interpolation.hpp>
 
 struct BSplinesX : ddc::UniformBSplines<X, 3> {};
 struct BSplinesVx : ddc::UniformBSplines<Vx, 3> {};
@@ -32,22 +32,23 @@ using SplineInterpPointsVy =
     ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyClosure,
                                      SplineVyClosure>;
 
-ExtrapolationRule constexpr XExtrapRule = PERIODIC;
-
 using SplineInterpolatorX =
-    SplineInterpolator<Kokkos::DefaultExecutionSpace, BSplinesX, GridX,
-                       XExtrapRule, XExtrapRule, SplineXClosure,
-                       SplineXClosure>;
+    SplineInterpolator<Kokkos::DefaultExecutionSpace, IdxRange<BSplinesX>,
+                       IdxRange<GridX>, ExtrapolationRule::Periodic,
+                       SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
-using SplineInterpolatorVx =
-    SplineInterpolator<Kokkos::DefaultExecutionSpace, BSplinesVx, GridVx,
-                       CONSTANT, CONSTANT, SplineVxClosure, SplineVxClosure>;
+using SplineInterpolatorVx = SplineInterpolator<
+    Kokkos::DefaultExecutionSpace, IdxRange<BSplinesVx>, IdxRange<GridVx>,
+    ExtrapolationRule::Constant_Constant,
+    SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
 
 // SplineBuilder and SplineEvaluator definition
 using SplineInterpolatorY =
-    SplineInterpolator<Kokkos::DefaultExecutionSpace, BSplinesY, GridY,
-                       PERIODIC, PERIODIC, SplineYClosure, SplineYClosure>;
+    SplineInterpolator<Kokkos::DefaultExecutionSpace, IdxRange<BSplinesY>,
+                       IdxRange<GridY>, ExtrapolationRule::Periodic,
+                       SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
 
-using SplineInterpolatorVy =
-    SplineInterpolator<Kokkos::DefaultExecutionSpace, BSplinesVy, GridVy,
-                       CONSTANT, CONSTANT, SplineVyClosure, SplineVyClosure>;
+using SplineInterpolatorVy = SplineInterpolator<
+    Kokkos::DefaultExecutionSpace, IdxRange<BSplinesVy>, IdxRange<GridVy>,
+    ExtrapolationRule::Constant_Constant,
+    SplineBoundaryClosures<SplineVyClosure, SplineVyClosure>>;
