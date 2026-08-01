@@ -21,8 +21,5 @@ else()
   add_subdirectory(src/external/gyselalibxx)
 endif()
 
-## Build the C++ source library in `src/C++/`
-add_subdirectory(src/C++)
-
 ## Build the simulations (applications mains) in `apps/`
 add_subdirectory(apps/)
