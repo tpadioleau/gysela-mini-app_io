@@ -2,16 +2,21 @@
 
 add_executable(gys_io
     gys_io.cpp
+    fluid_moments.cpp
 )
 
 target_link_libraries(gys_io
     PUBLIC
-        mini_app_io_lib
         DDC::core
         DDC::pdi
         PDI::PDI_C
         paraconf::paraconf
         MPI::MPI_CXX
+        gyselalibxx::quadrature
+        gyselalibxx::utils
+        gyselalibxx::speciesinfo
+        gyselalibxx::io
+        gyselalibxx::mpi_parallelisation
 )
 
 # Set PYTHONPATH to include the python directory for Python module imports

@@ -2,7 +2,6 @@ add_executable(gys_compress gys_compress.cpp predcorr_compress.cpp)
 
 target_link_libraries(gys_compress
     PUBLIC
-        mini_app_io_lib
         DDC::core
         PDI::PDI_C
         paraconf::paraconf
